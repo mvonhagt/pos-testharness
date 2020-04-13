@@ -1,2 +1,1 @@
-docker rmi pos_testharness:local
-docker build -t pos_testharness:local .
+Powershell.exe -executionpolicy remotesigned -File  docker-build-local.ps1
