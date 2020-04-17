@@ -11,7 +11,7 @@ $DockerRepository = $Repository
 if ($BuildNumber -eq $null) {
 $DockerRepository = $Repository+":latest"
 }Else{
-$DockerRepository = $Repository+$BuildNumber
+$DockerRepository = $Repository+":"+$BuildNumber
 }
 
 docker login -u mvonhagt -p mv1209v12
