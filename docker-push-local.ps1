@@ -1,4 +1,6 @@
 param ($Repository, $BuildNumber)
+write-host $Repository
+write-host $BuildNumber
 
 if ($Repository -eq $null) {
 $DockerRepository = "mvonhagt/pos_testharness:"
