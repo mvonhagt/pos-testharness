@@ -1,6 +1,12 @@
-param ($Repository, $BuildNumber)
+param ($Repository, $BuildNumber,$DockerUser, $DockerPwd  )
 write-host $Repository
 write-host $BuildNumber
+write-host $DockerUser
+write-host $DockerPwd
+
+$DockerEncPassword = ConvertTo-SecureString "$DockerPwd" -AsPlainText -Force
+$Credential = New-Object System.Management.Automation.PSCredential ($DockerUser, $DockerEncPassword)
+//Invoke-Command -ComputerName node1 -Credential $Credential -ScriptBlock {Get-Process}
 
 if ($Repository -eq $null) {
 $DockerRepository = "mvonhagt/pos_testharness:"
@@ -14,7 +20,8 @@ $DockerRepository = $Repository+":latest"
 $DockerRepository = $Repository+":"+$BuildNumber
 }
 
-docker login -u mvonhagt -p mv1209v12
+//docker login -u mvonhagt -p mv1209v12
+//docker login -u $DockerUser -p $DockerEncPassword
 # docker tag pos_testharness:local mvonhagt/pos_testharness:latest
 # docker push mvonhagt/pos_testharness:latest
 # docker rmi mvonhagt/pos_testharness:latest
