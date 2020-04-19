@@ -1,14 +1,14 @@
 param ($Repository, $BuildNumber,$DockerUser, $DockerPwd  )
 
 ## Convert the user and password from secret to redable form
-$DockerUser = [System.Text.Encoding]::UTF8.GetBytes($DockerUser)
-$DockerUser = [System.Convert]::ToBase64String($DockerUser)
-$DockerUser  = [System.Convert]::FromBase64String($DockerUser)
-$DockerUser =  [System.Text.Encoding]::UTF8.GetString($DockerUser)
-$DockerPwd  = [System.Text.Encoding]::UTF8.GetBytes($DockerPwd )
-$DockerPwd  = [System.Convert]::ToBase64String($DockerPwd )
-$DockerPwd  = [System.Convert]::FromBase64String($DockerPwd)
-$DockerPwd =  [System.Text.Encoding]::UTF8.GetString($DockerPwd)
+#$DockerUser = [System.Text.Encoding]::UTF8.GetBytes($DockerUser)
+#$DockerUser = [System.Convert]::ToBase64String($DockerUser)
+#$DockerUser  = [System.Convert]::FromBase64String($DockerUser)
+#$DockerUser =  [System.Text.Encoding]::UTF8.GetString($DockerUser)
+#$DockerPwd  = [System.Text.Encoding]::UTF8.GetBytes($DockerPwd )
+#$DockerPwd  = [System.Convert]::ToBase64String($DockerPwd )
+#$DockerPwd  = [System.Convert]::FromBase64String($DockerPwd)
+#$DockerPwd =  [System.Text.Encoding]::UTF8.GetString($DockerPwd)
 
 write-host $DockerUser
 write-host $DockerPwd
