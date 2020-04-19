@@ -1,6 +1,6 @@
 param ($Repository, $BuildNumber,$DockerUser, $DockerPwd  )
 
-## Convert the user and password from secret to redable form
+## Convert the user and password from secret to redable form (note: this block is not necessry to login... 19/04/20)
 #$DockerUser = [System.Text.Encoding]::UTF8.GetBytes($DockerUser)
 #$DockerUser = [System.Convert]::ToBase64String($DockerUser)
 #$DockerUser  = [System.Convert]::FromBase64String($DockerUser)
@@ -9,9 +9,8 @@ param ($Repository, $BuildNumber,$DockerUser, $DockerPwd  )
 #$DockerPwd  = [System.Convert]::ToBase64String($DockerPwd )
 #$DockerPwd  = [System.Convert]::FromBase64String($DockerPwd)
 #$DockerPwd =  [System.Text.Encoding]::UTF8.GetString($DockerPwd)
-
-write-host $DockerUser
-write-host $DockerPwd
+##write-host $DockerUser
+##write-host $DockerPwd
 
 if ($Repository -eq $null) {
 $DockerRepository = "mvonhagt/pos_testharness:"
@@ -24,7 +23,7 @@ $DockerRepository = $Repository+":latest"
 }Else{
 $DockerRepository = $Repository+":"+$BuildNumber
 }
-
+## login to private repository 
 docker login -u $DockerUser -p $DockerPwd
 # docker tag pos_testharness:local mvonhagt/pos_testharness:latest
 # docker push mvonhagt/pos_testharness:latest
