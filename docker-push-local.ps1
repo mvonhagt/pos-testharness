@@ -1,4 +1,4 @@
-param ($Repository, $BuildNumber,$DockerUser, $DockerPwd  )
+param ($Repository, $BuildNumber, $DockerUser, $DockerPwd  )
 
 ## Convert the user and password from secret to redable form (note: this block is not necessry to login... 19/04/20)
 #$DockerUser = [System.Text.Encoding]::UTF8.GetBytes($DockerUser)
@@ -13,15 +13,17 @@ param ($Repository, $BuildNumber,$DockerUser, $DockerPwd  )
 ##write-host $DockerPwd
 
 if ($Repository -eq $null) {
-$DockerRepository = "mvonhagt/pos_testharness:"
-}Else{
-$DockerRepository = $Repository
+    $DockerRepository = "mvonhagt/pos_testharness:"
+}
+Else {
+    $DockerRepository = $Repository
 }
 
 if ($BuildNumber -eq $null) {
-$DockerRepository = $Repository+":latest"
-}Else{
-$DockerRepository = $Repository+":"+$BuildNumber
+    $DockerRepository = $Repository + ":latest"
+}
+Else {
+    $DockerRepository = $Repository + ":" + $BuildNumber
 }
 ## login to private repository 
 docker login -u $DockerUser -p $DockerPwd
