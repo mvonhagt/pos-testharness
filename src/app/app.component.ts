@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
   public getCustomerSummaryData = {
     actionCode: "CUSTOMER_Summary",
     customerNumberSearch: "",
-    tokenToUse: "",
+    tokenToUse: "",   
   };
 
   public getPartDetailsData = {
