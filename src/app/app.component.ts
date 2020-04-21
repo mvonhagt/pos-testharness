@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class AppComponent implements OnInit {
   public url: string = `http://localhost:3000`;
 
-  // this is the payload for http://localhost:3000 (same as AIS token payload)
+  // this is the payload for http://localhost:3000 (same as AIS token payload) aaa
   public loginData = {
     actionCode: "LOGIN",
     brand: " ",
