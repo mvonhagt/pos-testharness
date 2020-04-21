@@ -1,3 +1,2 @@
-docker rmi pos_testharness:local
-docker build -t pos_testharness:local .
-  
+docker rmi mvonhagt/pos_testharness:latest
+docker build -t mvonhagt/pos_testharness:latest .
