@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
   public getCustomerSummaryData = {
     actionCode: "CUSTOMER_Summary",
     customerNumberSearch: "",
-    tokenToUse: "",   
+    tokenToUse: "",
   };
 
   public getPartDetailsData = {
@@ -324,6 +324,10 @@ export class AppComponent implements OnInit {
 
   public getJDEUsersListData = {
     userFilter: "",
+  };
+
+  public forgottenPasswordData = {
+    email: "",
   };
 
   public jsonString: string = "";
@@ -1990,7 +1994,25 @@ export class AppComponent implements OnInit {
       });
   }
   //-----------------------------------------------
-  //--------------------------------
+
+  //-----------------------------------------------
+  forgottenPassword(email: string) {
+    // http call to node js server
+    this.forgottenPasswordData.email = email;
+    this.url = "http://localhost:3000/user/ForgottenPassword";
+    this.http
+      .post(this.url, this.forgottenPasswordData)
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-----------------------------------------------
 
   //-----------------------------------------------
 
