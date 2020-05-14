@@ -2021,5 +2021,5 @@ export class AppComponent implements OnInit {
     this.keyStrokeValue = event.target.value;
     this.getCustomerFuzzy(this.keyStrokeValue, this.tokenString);
   }
-  //-------------------------------------------
+  //----------------------------------------------
 }
