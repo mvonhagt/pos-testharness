@@ -13,17 +13,6 @@
 
 <div class="form-check">
   <div>
-    <label class="form-check-label">Register External User - Dealer</label>
-    <input
-      type="checkbox"
-      name="showRegisterDealer="
-      [(ngModel)]="showRegisterDealer"
-    />
-  </div>
-</div>
-
-<div class="form-check">
-  <div>
     <label class="form-check-label">Reset External User Password</label>
     <input
       type="checkbox"
@@ -170,6 +159,17 @@
   <div>
     <label class="form-check-label">List Country Codes</label>
     <input type="checkbox" name="showCountry=" [(ngModel)]="showCountry" />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">List External Country Codes</label>
+    <input
+      type="checkbox"
+      name="showExternalCountry="
+      [(ngModel)]="showExternalCountry"
+    />
   </div>
 </div>
 
@@ -344,6 +344,127 @@
   </div>
 </div>
 
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Set User Security</label>
+    <input
+      type="checkbox"
+      name="showSetUserSecurity="
+      [(ngModel)]="showSetUserSecurity"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Set JDE User Security</label>
+    <input
+      type="checkbox"
+      name="showSetJDEUserSecurity="
+      [(ngModel)]="showSetJDEUserSecurity"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Get JDE Printers</label>
+    <input
+      type="checkbox"
+      name="showJDEPrinters="
+      [(ngModel)]="showJDEPrinters"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Fetch Registerd Users</label>
+    <input
+      type="checkbox"
+      name="showFetchRegisteredUsers="
+      [(ngModel)]="showFetchRegisteredUsers"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Create Staging Order</label>
+    <input
+      type="checkbox"
+      name="showCreateOrder="
+      [(ngModel)]="showCreateOrder"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Delete Staging Order</label>
+    <input
+      type="checkbox"
+      name="showDeleteOrder="
+      [(ngModel)]="showDeleteOrder"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Fetch User State</label>
+    <input
+      type="checkbox"
+      name="showFetchUserState="
+      [(ngModel)]="showFetchUserState"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Vehicle Selected</label>
+    <input
+      type="checkbox"
+      name="showVehicleSelected="
+      [(ngModel)]="showVehicleSelected"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Fetch Customer Default Vehicle</label>
+    <input
+      type="checkbox"
+      name="showFetchDefaultVehicle="
+      [(ngModel)]="showFetchDefaultVehicle"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Fetch Customer ShipTo</label>
+    <input
+      type="checkbox"
+      name="showFetchCustomerShipTo="
+      [(ngModel)]="showFetchCustomerShipTo"
+    />
+  </div>
+</div>
+
+<div class="form-check">
+  <div>
+    <label class="form-check-label">Fetch Customer BillTo</label>
+    <input
+      type="checkbox"
+      name="showFetchCustomerBillTo="
+      [(ngModel)]="showFetchCustomerBillTo"
+    />
+  </div>
+</div>
+
 <!-- END - Check boxes  -->
 
 <!--- BEGIN - Login  -->
@@ -417,6 +538,22 @@
 
   <div class="form-group row">
     <label for="example-text-input" class="col-2 col-form-label"
+      >Country code:</label
+    >
+    <div class="col-10">
+      <input class="form-control" #countryCode777 type="text" value="AU" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label">Brand:</label>
+    <div class="col-10">
+      <input class="form-control" #brand777 type="text" value="ARBUS_PY" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
       >Error Message:</label
     >
     <div class="col-10">
@@ -437,7 +574,9 @@
         registerExternalUserPublic(
           email777.value,
           name777.value,
-          postCode777.value
+          postCode777.value,
+          countryCode777.value,
+          brand777.value
         )
       "
     >
@@ -447,115 +586,9 @@
 </div>
 <!--- END - Register External User - Public  -->
 
-<!-- BEGIN - Register External User - Dealer, Store..  -->
-<div *ngIf="showRegisterDealer">
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label">email:</label>
-    <div class="col-10">
-      <input
-        class="form-control"
-        #email888
-        type="text"
-        value="marlon@vonhagt.com"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label">name:</label>
-    <div class="col-10">
-      <input class="form-control" #name888 type="text" value="Marlon Vonhagt" />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label"
-      >Parent Customer:</label
-    >
-    <div class="col-10">
-      <input
-        class="form-control"
-        #parentCustomer888
-        type="text"
-        value="12345678"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label"
-      >Effective Date:</label
-    >
-    <div class="col-10">
-      <input
-        class="form-control"
-        #effectiveDate888
-        type="text"
-        value="2020-01-01T00:00:00"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label"
-      >Effective Date:</label
-    >
-    <div class="col-10">
-      <input
-        class="form-control"
-        #expiryDate888
-        type="text"
-        value="2020-06-30T00:00:00"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label"
-      >Node Token:</label
-    >
-    <div class="col-10">
-      <input class="form-control" #nodeToken888 type="text" value=" " />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label"
-      >Error Message:</label
-    >
-    <div class="col-10">
-      <input
-        [(ngModel)]="errorMessage"
-        #errorMessageParm
-        class="form-control"
-        type="text"
-        value=""
-      />
-    </div>
-  </div>
-
-  <div class="button">
-    <button
-      class="btn btn-primary"
-      (click)="
-        registerExternalUserDealer(
-          email888.value,
-          name888.value,
-          parentCustomer888.value,
-          effectiveDate888.value,
-          expiryDate888.value,
-          nodeToken888.value
-        )
-      "
-    >
-      Register External User Dealer
-    </button>
-  </div>
-</div>
-<!--- END - Register External User - Dealer, Store..  -->
-
 <!-- BEGIN - Reset external user password..  -->
 <div *ngIf="showResetUserPassword">
+  <H3>Reset External User Password</H3>
   <div class="form-group row">
     <label for="example-text-input" class="col-2 col-form-label">email:</label>
     <div class="col-10">
@@ -815,6 +848,16 @@
 
   <div class="form-group row">
     <label for="example-text-input" class="col-2 col-form-label"
+      >Cust Type (BILLTO, SHIPTO,RETAIL)</label
+    >
+    <div class="col-10">
+      <!-- <input class="form-control" (keyup)="custKeySearch($event)" #custSearchString type="text" value="">  -->
+      <input class="form-control" #customerType type="text" value="" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
       >Token to use</label
     >
     <div class="col-10">
@@ -831,7 +874,13 @@
   <div class="button">
     <button
       class="btn btn-primary"
-      (click)="getCustomerFuzzy(custSearchString.value, tokenToUse.value)"
+      (click)="
+        getCustomerFuzzy(
+          custSearchString.value,
+          customerType.value,
+          tokenToUse.value
+        )
+      "
     >
       Search
     </button>
@@ -2529,6 +2578,44 @@
 </div>
 <!-- END - Country List  -->
 
+<!-- BEGIN - External Country Code List  -->
+<div *ngIf="showExternalCountry">
+  <br /><H3>External Country Code List</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Enter Brand:</label
+    >
+    <div class="col-10">
+      <input class="form-control" #brand_qq type="text" value="ARBAUS_PY" />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="getExternalCountryList(brand_qq.value)"
+    >
+      Get External Country Code List
+    </button>
+  </div>
+  <br />
+  <div>
+    <table *ngIf="showExternalCountryRows" border="2">
+      <tr>
+        <td>Country Code</td>
+        <td>Country Description</td>
+        <td></td>
+      </tr>
+      <tr *ngFor="let record of countryExternalSearchArray; let i = index">
+        <td>{{ record.CountryCode }}</td>
+        <td>{{ record.CountryDescription }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!-- END - External Country Codes List  -->
+
 <!-- BEGIN - Zone List  -->
 <div *ngIf="showZone">
   <br /><H3>Zone List</H3><br />
@@ -3465,6 +3552,13 @@
   </div>
 
   <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label">Brand:</label>
+    <div class="col-10">
+      <input class="form-control" #brand_VS type="text" value="ARBAUS_PY" />
+    </div>
+  </div>
+
+  <div class="form-group row">
     <label for="example-text-input" class="col-2 col-form-label"
       >Token to use</label
     >
@@ -3497,6 +3591,7 @@
           transmissionType_VS.value,
           engineCode_VS.value,
           engineType_VS.value,
+          brand_VS.value,
           tokenToUse.value
         )
       "
@@ -3700,7 +3795,7 @@
 </div>
 <!-- END - Item aaFuzzy Search  -->
 
-<!-- BEGIN - Security ggFunction List  -->
+<!-- BEGIN - Security Function List  -->
 <div *ngIf="showSecurityFunctionList">
   <br /><H3>Fetch Security Function List</H3><br />
 
@@ -3767,6 +3862,15 @@
 
   <div class="form-group row">
     <label for="example-text-input" class="col-2 col-form-label"
+      >Fetch regsitered (true/false)
+    </label>
+    <div class="col-10">
+      <input class="form-control" #fetchRegistered type="text" value="true" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
       >Token to use</label
     >
     <div class="col-10">
@@ -3783,7 +3887,13 @@
   <div class="button">
     <button
       class="btn btn-primary"
-      (click)="getJDEUsersList(tokenToUse.value, userFilter.value)"
+      (click)="
+        getJDEUsersList(
+          tokenToUse.value,
+          userFilter.value,
+          fetchRegistered.value
+        )
+      "
     >
       Get JDE Users
     </button>
@@ -3843,3 +3953,916 @@
   </div>
 </div>
 <!--- END - External Forgotten Password ..  -->
+
+<!-- BEGIN - Security Function List  -->
+<div *ngIf="showSecurityFunctionList">
+  <br /><H3>Fetch Security Function List</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >INTERNAL or EXTERNAL</label
+    >
+    <div class="col-10">
+      <input class="form-control" #type123 type="text" value="INTERNAL" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="getSecurityFunctionList(tokenToUse.value, type123.value)"
+    >
+      Get Security Function List
+    </button>
+  </div>
+  <br />
+  <div>
+    <table border="2">
+      <tr>
+        <td>Security Role</td>
+        <td>Type</td>
+      </tr>
+      <tr *ngFor="let record of securityFunctionSearchArray; let i = index">
+        <td>{{ record.SecurityFunction }}</td>
+        <td>{{ record.SecurityType }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!-- END - Security Function List  -->
+
+<!-- BEGIN - Set user security  -->
+<div *ngIf="showSetUserSecurity">
+  <br /><H3>Set User Security</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Email Address</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #email9
+        type="text"
+        value="marlon@vonhagt.com"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Action Code A/C</label
+    >
+    <div class="col-10">
+      <input class="form-control" #actionCode9 type="text" value="A" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Parent Customer:</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #parentCustomer9
+        type="text"
+        value="12345678"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label">name:</label>
+    <div class="col-10">
+      <input class="form-control" #name9 type="text" value="Marlon Vonhagt" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Active (1/0):</label
+    >
+    <div class="col-10">
+      <input class="form-control" #active9 type="text" value="1" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Effective Date:</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #effectiveDate9
+        type="text"
+        value="2020-01-01T00:00:00"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Expiry Date:</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #expiryDate9
+        type="text"
+        value="2040-06-30T00:00:00"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Security Functions:</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #securityFunctions9
+        type="text"
+        value="AdminUser, ManageUsers, SeeBuyPrice"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="
+        setUserSecurity(
+          email9.value,
+          actionCode9.value,
+          parentCustomer9.value,
+          name9.value,
+          active9.value,
+          effectiveDate9.value,
+          expiryDate9.value,
+          securityFunctions9.value,
+          tokenToUse.value
+        )
+      "
+    >
+      Set User Security
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Set Users security  -->
+
+<!-- BEGIN - Set jde user security  -->
+<div *ngIf="showSetJDEUserSecurity">
+  <br /><H3>Set JDE User Security</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >JDE User ID</label
+    >
+    <div class="col-10">
+      <input class="form-control" #userName1111 type="text" value="mvonhagt" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label">Branch</label>
+    <div class="col-10">
+      <input class="form-control" #branch1111 type="text" value="1301" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Printer Role</label
+    >
+    <div class="col-10">
+      <input class="form-control" #printerRole1111 type="text" value="PRTKIL" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Registered 0/1</label
+    >
+    <div class="col-10">
+      <input class="form-control" #registered1111 type="text" value="1" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="
+        setJDEUserSecurity(
+          userName1111.value,
+          branch1111.value,
+          printerRole1111.value,
+          registered1111.value,
+          tokenToUse.value
+        )
+      "
+    >
+      Set JDE User Security
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - JDE User Security  -->
+
+<!-- BEGIN - JDE Printers  -->
+<div *ngIf="showJDEPrinters">
+  <br /><H3>Fetch JDE Printers</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label">Brand</label>
+    <div class="col-10">
+      <input class="form-control" #brand789 type="text" value="ARBAUS_PY" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="getJDEPrinters(brand789.value, tokenToUse.value)"
+    >
+      Get JDE Printers
+    </button>
+  </div>
+  <br />
+  <div>
+    <table border="2">
+      <tr>
+        <td>Printer ID</td>
+        <td>Printer Desc</td>
+      </tr>
+      <tr *ngFor="let record of jdePrinterSearchArray; let i = index">
+        <td>{{ record.printerRole }}</td>
+        <td>{{ record.printerDescription }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!-- END - JDE Printers  -->
+
+<!-- BEGIN - Fetch Registered Users  -->
+<div *ngIf="showFetchRegisteredUsers">
+  <br /><H3>Fetch Registered Users</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Parent Number</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #CustomerABNumber
+        type="text"
+        value="12345678"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="fetchRegisteredUsers(CustomerABNumber.value, tokenToUse.value)"
+    >
+      Fetch Registered Users
+    </button>
+  </div>
+  <br />
+  <div>
+    <table border="2">
+      <tr>
+        <td>Email</td>
+        <td>Name</td>
+        <td>Date Created</td>
+      </tr>
+      <tr *ngFor="let record of fetchRegisteredUsersArray; let i = index">
+        <td>{{ record.email }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.dateCreated }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<!-- END - Fetch Registered Users  -->
+
+<!-- BEGIN - Create Order  -->
+<div *ngIf="showCreateOrder">
+  <br /><H3>Create Staging Order</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Customer Number</label
+    >
+    <div class="col-10">
+      <input class="form-control" #customerNumber type="text" value="1305" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Ship To Number</label
+    >
+    <div class="col-10">
+      <input class="form-control" #shipToNumber type="text" value="1305" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Order Type</label
+    >
+    <div class="col-10">
+      <input class="form-control" #orderType type="text" value="SO" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Parts Vehicle ID</label
+    >
+    <div class="col-10">
+      <input class="form-control" #partsVehicleID type="text" value="9900001" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Customer Vehicle ID</label
+    >
+    <div class="col-10">
+      <input class="form-control" #customerVehicleID type="text" value="8" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Vehicle Short Desc</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #vehicleShortDescription
+        type="text"
+        value="short deschksjhfkhf"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Reference</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #reference
+        type="text"
+        value="gslgjglkjglfd"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label">Branch</label>
+    <div class="col-10">
+      <input class="form-control" #branch type="text" value="1301" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="
+        createOrder(
+          customerNumber.value,
+          shipToNumber.value,
+          orderType.value,
+          partsVehicleID.value,
+          customerVehicleID.value,
+          vehicleShortDescription.value,
+          reference.value,
+          branch.value,
+          tokenToUse.value
+        )
+      "
+    >
+      Create Staging Order
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Crate Order -->
+
+<!-- BEGIN - Delete Order  -->
+<div *ngIf="showDeleteOrder">
+  <br /><H3>Delete Staging Order</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Order Number</label
+    >
+    <div class="col-10">
+      <input class="form-control" #orderNumber567 type="text" value="T13" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="deleteOrder(orderNumber567.value, tokenToUse.value)"
+    >
+      Delete Staging Order
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Delete Order -->
+
+<!-- BEGIN - Fetch User State  -->
+<div *ngIf="showFetchUserState">
+  <br /><H3>Fetch User State</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button class="btn btn-primary" (click)="fetchUserState(tokenToUse.value)">
+      Fetch User State
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Fetch User State -->
+
+<!-- BEGIN - Vehicle Selected  -->
+<div *ngIf="showVehicleSelected">
+  <br /><H3>Update Vehicle Selected</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Parts Vehicle ID</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #partsVehicleID
+        type="text"
+        value="99000001"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Customer Vehicle ID</label
+    >
+    <div class="col-10">
+      <input class="form-control" #customerVehicleID type="text" value="40" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Vehicle Description</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #vehicleDescription
+        type="text"
+        value="MAAAAAAAAAA -Veh Desc"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="
+        vehicleSelected(
+          partsVehicleID.value,
+          customerVehicleID.value,
+          vehicleDescription.value,
+          tokenToUse.value
+        )
+      "
+    >
+      Update Vehicle Selected
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Vehicle Selected -->
+
+<!-- BEGIN - Fetch Customer default Vehicle  -->
+<div *ngIf="showFetchDefaultVehicle">
+  <br /><H3>Fetch Customer default Vehicle</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Customer Number</label
+    >
+    <div class="col-10">
+      <input
+        class="form-control"
+        #customerNumber876
+        type="text"
+        value="325188"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="fetchDefaultVehicle(customerNumber876.value, tokenToUse.value)"
+    >
+      Fetch Customer default Vehicle
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Fetch Customer default Vehicle -->
+
+<!-- BEGIN - Fetch Customer ShipTo -->
+<div *ngIf="showFetchCustomerShipTo">
+  <br /><H3>Fetch Customer ShipTo</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Customer BillTo Number</label
+    >
+    <div class="col-10">
+      <input class="form-control" #customerBillTo type="text" value="102487" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="fetchCustomerShipTo(customerBillTo.value, tokenToUse.value)"
+    >
+      Fetch Customer ShipTo
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Fetch Customer ShipTo -->
+
+<!-- BEGIN - Fetch Customer BillTo -->
+<div *ngIf="showFetchCustomerBillTo">
+  <br /><H3>Fetch Customer BillTo</H3><br />
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Customer ShipTo Number</label
+    >
+    <div class="col-10">
+      <input class="form-control" #customerShipTo type="text" value="196273" />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Error Message:</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="errorMessage"
+        #errorMessageParm
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"
+      >Token to use</label
+    >
+    <div class="col-10">
+      <input
+        [(ngModel)]="tokenString"
+        #tokenToUse
+        class="form-control"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+
+  <div class="button">
+    <button
+      class="btn btn-primary"
+      (click)="fetchCustomerBillTo(customerShipTo.value, tokenToUse.value)"
+    >
+      Fetch Customer BillTo
+    </button>
+  </div>
+  <br />
+</div>
+<!-- END - Fetch Customer BillTo -->

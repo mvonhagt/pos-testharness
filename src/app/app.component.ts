@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class AppComponent implements OnInit {
   public url: string = `http://localhost:3000`;
 
-  // this is the payload for http://localhost:3000 (same as AIS token payload) aaa
+  // this is the payload for http://localhost:3000 (same as AIS token payload)
   public loginData = {
     actionCode: "LOGIN",
     brand: " ",
@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
 
   public getCustomerFuzzyData = {
     customerfuzzySearch: "",
+    customerType: "",
     tokenToUse: "",
   };
 
@@ -161,6 +162,10 @@ export class AppComponent implements OnInit {
     tokenToUse: "",
   };
 
+  public getExternalCountryData = {
+    brand: "",
+  };
+
   public getZoneData = {
     tokenToUse: "",
   };
@@ -208,6 +213,35 @@ export class AppComponent implements OnInit {
   public getBranchData = {
     actionCode: "BRANCH",
     tokenToUse: "",
+  };
+
+  public getJDEPrinterData = {
+    brand: " ",
+  };
+
+  public fetchRegisteredUsersData = {
+    CustomerABNumber: " ",
+  };
+
+  public createOrderData = {
+    customerNumber: 0,
+    shipToNumber: 0,
+    orderType: "",
+    partsVehicleID: 0,
+    customerVehicleID: 0,
+    vehicleShortDescription: "",
+    reference: "",
+    branch: "",
+  };
+
+  public vehicleSelectedData = {
+    partsVehicleID: 0,
+    customerVehicleID: 0,
+    vehicleDescription: "",
+  };
+
+  public fetchDefaultVehicleData = {
+    customerNumber: 0,
   };
 
   public getOrderSummaryFreeData = {
@@ -272,6 +306,7 @@ export class AppComponent implements OnInit {
     transmissionType: "",
     engineCode: "",
     engineType: "",
+    brand: "",
     tokenToUse: "",
   };
 
@@ -301,15 +336,8 @@ export class AppComponent implements OnInit {
     email: "",
     name: "",
     postCode: "",
-  };
-
-  public registerExternalUserDealerData = {
-    email: "",
-    name: "",
-    parentCustomer: "",
-    effectiveDate: "",
-    expiryDate: "",
-    nodeToken: "",
+    countryCode: "",
+    brand: "",
   };
 
   public resetUserPasswordData = {
@@ -324,10 +352,43 @@ export class AppComponent implements OnInit {
 
   public getJDEUsersListData = {
     userFilter: "",
+    fetchRegistered: false,
   };
 
   public forgottenPasswordData = {
     email: "",
+  };
+  public setUserSecurityData = {
+    email: "",
+    actionCode: "",
+    parentCustomer: "",
+    name: "",
+    active: true,
+    effectiveDate: "",
+    expiryDate: "",
+    securityFunctions: ["ManageUsers", "SeeBuyPrice", "AdminUser"],
+  };
+
+  public setJDEUserSecurityData = {
+    userName: "",
+    branch: "",
+    printerRole: "",
+    registered: true,
+    securityFunctions: [],
+  };
+
+  public deleteOrderData = {
+    orderNumber: "",
+  };
+
+  public fetchUserStateData = {};
+
+  public fetchCustomerShipToData = {
+    customerBillTo: 0,
+  };
+
+  public fetchCustomerBillToData = {
+    customerShipTo: 0,
   };
 
   public jsonString: string = "";
@@ -342,6 +403,7 @@ export class AppComponent implements OnInit {
   public partDetailsSearchArray: [] = [];
   public stateSearchArray: [] = [];
   public countrySearchArray: [] = [];
+  public countryExternalSearchArray: [] = [];
   public zoneSearchArray: [] = [];
   public routeSearchArray: [] = [];
   public freightHandlingSearchArray: [] = [];
@@ -362,7 +424,8 @@ export class AppComponent implements OnInit {
   public fetchVehicleListSearchArray: [] = [];
   public securityFunctionSearchArray: [] = [];
   public jdeUsersSearchArray: [] = [];
-
+  public jdePrinterSearchArray: [] = [];
+  public fetchRegisteredUsersArray: [] = [];
   public showPriceRows: boolean = false;
   public showFuzzyRows: boolean = false;
   public showItemFuzzyRows: boolean = false;
@@ -372,6 +435,9 @@ export class AppComponent implements OnInit {
   public showPartDetailsRows: boolean = false;
   public showStateRows: boolean = false;
   public showCountryRows: boolean = false;
+  public showExternalCountryRows: boolean = false;
+  public showSetUserSecurity: boolean = false;
+  public showSetJDEUserSecurity: boolean = false;
   public showZoneRows: boolean = false;
   public showRouteRows: boolean = false;
   public showFreightHandlingRows: boolean = false;
@@ -390,6 +456,12 @@ export class AppComponent implements OnInit {
   public showOrderSummaryFreeRows: boolean = false;
   public showFetchHierarchyRows: boolean = false;
   public showFetchVehicleListRows: boolean = false;
+  public showFetchRegisteredUsers: boolean = false;
+  public showCreateOrder: boolean = false;
+  public showDeleteOrder: boolean = false;
+  public showFetchUserState: boolean = false;
+  public showVehicleSelected: boolean = false;
+  public showFetchDefaultVehicle: boolean = false;
 
   public newCustomer: string = "";
   public errorMessage: string = "";
@@ -423,6 +495,9 @@ export class AppComponent implements OnInit {
   public showOrderSummaryFree: boolean = false;
   public showVehicleHierarchy: boolean = false;
   public showFetchVehicleList: boolean = false;
+  public showJDEPrinters: boolean = false;
+  public showFetchCustomerShipTo: boolean = false;
+  public showFetchCustomerBillTo: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -615,7 +690,11 @@ export class AppComponent implements OnInit {
   }
 
   //-------------------------------------------
-  getCustomerFuzzy(customerFuzzySearch: string, tokenToUse: string) {
+  getCustomerFuzzy(
+    customerFuzzySearch: string,
+    customerType: string,
+    tokenToUse: string
+  ) {
     // show search rows
     this.showPriceRows = false;
     this.showOrderSummaryRows = false;
@@ -641,6 +720,7 @@ export class AppComponent implements OnInit {
     this.showFuzzyRows = true;
     // http call to node js server
     this.getCustomerFuzzyData.customerfuzzySearch = customerFuzzySearch;
+    this.getCustomerFuzzyData.customerType = customerType;
     this.getCustomerFuzzyData.tokenToUse = tokenToUse;
     this.url = "http://localhost:3000/customer/search";
     this.http
@@ -1192,6 +1272,7 @@ export class AppComponent implements OnInit {
     transmissionType: string,
     engineCode: string,
     engineType: string,
+    brand: string,
     tokenToUse: string
   ) {
     // show search rows
@@ -1231,6 +1312,7 @@ export class AppComponent implements OnInit {
     this.fetchHierarchyData.transmissionType = transmissionType;
     this.fetchHierarchyData.engineCode = engineCode;
     this.fetchHierarchyData.engineType = engineType;
+    this.fetchHierarchyData.brand = brand;
     this.fetchHierarchyData.tokenToUse = tokenToUse;
 
     this.url = "http://localhost:3000/vehicle/FetchHierarchy";
@@ -1885,47 +1967,23 @@ export class AppComponent implements OnInit {
   //-------------------------------------------
 
   //-------------------------------------------
-  registerExternalUserPublic(email: string, name: string, postCode: string) {
+  registerExternalUserPublic(
+    email: string,
+    name: string,
+    postCode: string,
+    countryCode: string,
+    brand: string
+  ) {
     // http call to node js server
     this.registerExternalUserPublicData.email = email;
     this.registerExternalUserPublicData.name = name;
     this.registerExternalUserPublicData.postCode = postCode;
+    this.registerExternalUserPublicData.countryCode = countryCode;
+    this.registerExternalUserPublicData.brand = brand;
     this.url = "http://localhost:3000/user/RegisterExternalUserPublic";
     this.http
       .post(this.url, this.registerExternalUserPublicData, {
         headers: new HttpHeaders().set("tokenToUse", " "),
-      })
-      .toPromise()
-      .then((responseData: any) => {
-        this.errorMessage = responseData.ErrorMessage;
-      })
-      .catch((error: any) => {
-        this.jsonString = JSON.stringify(error);
-        var obj = JSON.parse(this.jsonString);
-        this.errorMessage = error.error.ErrorMessage;
-      });
-  }
-  //-------------------------------------------
-  registerExternalUserDealer(
-    email: string,
-    name: string,
-    parentCustomer: string,
-    effectiveDate: string,
-    expiryDate: string,
-    nodeToken: string
-  ) {
-    // http call to node js server
-    this.registerExternalUserDealerData.email = email;
-    this.registerExternalUserDealerData.name = name;
-    this.registerExternalUserDealerData.parentCustomer = parentCustomer;
-    this.registerExternalUserDealerData.effectiveDate = effectiveDate;
-    this.registerExternalUserDealerData.expiryDate = expiryDate;
-    this.registerExternalUserDealerData.nodeToken = nodeToken;
-
-    this.url = "http://localhost:3000/user/RegisterExternalUserDealer";
-    this.http
-      .post(this.url, this.registerExternalUserDealerData, {
-        headers: new HttpHeaders().set("tokenToUse", nodeToken),
       })
       .toPromise()
       .then((responseData: any) => {
@@ -1976,9 +2034,19 @@ export class AppComponent implements OnInit {
       });
   }
   //-------------------------------------------
-  getJDEUsersList(tokenToUse: string, userFilter: string) {
+  getJDEUsersList(
+    tokenToUse: string,
+    userFilter: string,
+    fetchRegistered: string
+  ) {
     // http call to node js server
     this.getJDEUsersListData.userFilter = userFilter;
+    if (fetchRegistered == "true") {
+      this.getJDEUsersListData.fetchRegistered = true;
+    } else {
+      this.getJDEUsersListData.fetchRegistered = false;
+    }
+
     this.url = "http://localhost:3000/user/FetchJDEUsers";
     this.http
       .post(this.url, this.getJDEUsersListData, {
@@ -1994,7 +2062,6 @@ export class AppComponent implements OnInit {
       });
   }
   //-----------------------------------------------
-
   //-----------------------------------------------
   forgottenPassword(email: string) {
     // http call to node js server
@@ -2013,13 +2080,336 @@ export class AppComponent implements OnInit {
       });
   }
   //-----------------------------------------------
+  //-------------------------------------------
+  getExternalCountryList(brand: string) {
+    this.showExternalCountryRows = true;
+    this.getExternalCountryData.brand = brand;
+    // http call to node js server
+    this.url = "http://localhost:3000/lists/CountryExternal";
 
-  //-----------------------------------------------
+    this.http
+      .post(this.url, this.getExternalCountryData, {
+        headers: new HttpHeaders().set("tokenToUse", " "),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.countryExternalSearchArray = responseData.SearchResults;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+      });
+  }
+  //-------------------------------------------
+  setUserSecurity(
+    email: string,
+    actionCode: string,
+    parentCustomer: string,
+    name: string,
+    active: string,
+    effectiveDate: string,
+    expiryDate: string,
+    securityFunctions: string,
+    tokenToUse: string
+  ) {
+    // http call to node js server
+    this.showSetUserSecurity = true;
+    this.url = "http://localhost:3000/user/SetUserSecurity";
+    this.setUserSecurityData.email = email;
+    this.setUserSecurityData.actionCode = actionCode;
+    this.setUserSecurityData.parentCustomer = parentCustomer;
+    this.setUserSecurityData.name = name;
+    this.setUserSecurityData.active = false;
+    if (active == "1") {
+      this.setUserSecurityData.active = true;
+    }
+    this.setUserSecurityData.effectiveDate = effectiveDate;
+    this.setUserSecurityData.expiryDate = expiryDate;
+
+    this.http
+      .post(this.url, this.setUserSecurityData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
 
   //-------------------------------------------
+
+  //-------------------------------------------
+  setJDEUserSecurity(
+    userName: string,
+    branch: string,
+    printerRole: string,
+    registered: string,
+    tokenToUse: string
+  ) {
+    // http call to node js server
+    this.showSetJDEUserSecurity = true;
+    this.url = "http://localhost:3000/user/SetJDEUserSecurity";
+    this.setJDEUserSecurityData.userName = userName;
+    this.setJDEUserSecurityData.branch = branch;
+    this.setJDEUserSecurityData.printerRole = printerRole;
+    this.setJDEUserSecurityData.registered = false;
+    if (registered == "1") {
+      this.setJDEUserSecurityData.registered = true;
+    }
+    this.setJDEUserSecurityData.securityFunctions = [
+      "ManageUsers",
+      "SeeBuyPrice",
+      "AdminUser",
+    ];
+
+    this.http
+      .post(this.url, this.setJDEUserSecurityData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+
+  //-------------------------------------------
+  getJDEPrinters(brand: string, tokenToUse: string) {
+    // show search rows
+    this.showJDEPrinters = true;
+    // http call to node js server
+    this.getJDEPrinterData.brand = brand;
+    this.url = "http://localhost:3000/lists/JDEPrinters";
+
+    this.http
+      .post(this.url, this.getJDEPrinterData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.jdePrinterSearchArray = responseData.SearchResults;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+      });
+  }
+  //-------------------------------------------
+  fetchRegisteredUsers(CustomerABNumber: string, tokenToUse: string) {
+    // show search rows
+    this.showFetchRegisteredUsers = true;
+    // http call to node js server
+    this.fetchRegisteredUsersData.CustomerABNumber = CustomerABNumber;
+    this.url = "http://localhost:3000/user/FetchRegisteredUsers";
+
+    this.http
+      .post(this.url, this.fetchRegisteredUsersData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.fetchRegisteredUsersArray = responseData.SearchResults;
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-------------------------------------------
+  createOrder(
+    customerNumber: string,
+    shipToNumber: string,
+    orderType: string,
+    partsVehicleID: string,
+    customerVehicleID: string,
+    vehicleShortDescription: string,
+    reference: string,
+    branch: string,
+    tokenToUse: string
+  ) {
+    // show search rows
+    this.showCreateOrder = true;
+    // http call to node js server
+    this.createOrderData.customerNumber = parseInt(customerNumber);
+    this.createOrderData.shipToNumber = parseInt(shipToNumber);
+    this.createOrderData.orderType = orderType;
+    this.createOrderData.partsVehicleID = parseInt(partsVehicleID);
+    this.createOrderData.customerVehicleID = parseInt(customerVehicleID);
+    this.createOrderData.vehicleShortDescription = vehicleShortDescription;
+    this.createOrderData.reference = reference;
+    this.createOrderData.branch = branch;
+
+    this.url = "http://localhost:3000/staging/CreateOrder";
+
+    this.http
+      .post(this.url, this.createOrderData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-------------------------------------------
+  deleteOrder(orderNumber: string, tokenToUse: string) {
+    // show search rows
+    this.showDeleteOrder = true;
+    // http call to node js server
+    this.deleteOrderData.orderNumber = orderNumber;
+
+    this.url = "http://localhost:3000/staging/DeleteOrder";
+
+    this.http
+      .post(this.url, this.deleteOrderData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-------------------------------------------
+
+  //-------------------------------------------
+  fetchUserState(tokenToUse: string) {
+    // show search rows
+    this.showFetchUserState = true;
+    // http call to node js server
+
+    this.url = "http://localhost:3000/userState/FetchUserState";
+
+    this.http
+      .post(this.url, this.fetchUserStateData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-------------------------------------------
+  vehicleSelected(
+    partsVehicleID: string,
+    customerVehicleID: string,
+    vehicleDescription: string,
+    tokenToUse: string
+  ) {
+    this.showVehicleSelected = true;
+    this.vehicleSelectedData.partsVehicleID = parseInt(partsVehicleID);
+    this.vehicleSelectedData.customerVehicleID = parseInt(customerVehicleID);
+    this.vehicleSelectedData.vehicleDescription = vehicleDescription.trim();
+
+    this.url = "http://localhost:3000/userState/VehicleSelected";
+
+    this.http
+      .post(this.url, this.vehicleSelectedData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-------------------------------------------
+  fetchDefaultVehicle(customerNumber: string, tokenToUse: string) {
+    this.showFetchDefaultVehicle = true;
+    this.fetchDefaultVehicleData.customerNumber = parseInt(customerNumber);
+
+    this.url = "http://localhost:3000/vehicle/FetchDefaultVehicle";
+
+    this.http
+      .post(this.url, this.fetchDefaultVehicleData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-------------------------------------------
+  fetchCustomerShipTo(customerBillTo: string, tokenToUse: string) {
+    this.showFetchCustomerShipTo = true;
+    this.fetchCustomerShipToData.customerBillTo = parseInt(customerBillTo);
+
+    this.url = "http://localhost:3000/customer/FetchCustomerShipTo";
+
+    this.http
+      .post(this.url, this.fetchCustomerShipToData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //-------------------------------------------
+  //-------------------------------------------
+  fetchCustomerBillTo(customerShipTo: string, tokenToUse: string) {
+    this.showFetchCustomerBillTo = true;
+    this.fetchCustomerBillToData.customerShipTo = parseInt(customerShipTo);
+
+    this.url = "http://localhost:3000/customer/FetchCustomerBillTo";
+
+    this.http
+      .post(this.url, this.fetchCustomerBillToData, {
+        headers: new HttpHeaders().set("tokenToUse", tokenToUse),
+      })
+      .toPromise()
+      .then((responseData: any) => {
+        this.errorMessage = responseData.ErrorMessage;
+      })
+      .catch((error: any) => {
+        this.jsonString = JSON.stringify(error);
+        var obj = JSON.parse(this.jsonString);
+        this.errorMessage = error.error.ErrorMessage;
+      });
+  }
+  //---------------------------------------------------
+
   custKeySearch(event: any) {
     this.keyStrokeValue = event.target.value;
-    this.getCustomerFuzzy(this.keyStrokeValue, this.tokenString);
+    this.getCustomerFuzzy(this.keyStrokeValue, " ", this.tokenString);
   }
-  //----------------------------------------------
+  //-------------------------------------------
 }
